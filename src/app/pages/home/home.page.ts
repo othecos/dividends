@@ -3,6 +3,7 @@ import { DataService, Message } from '../../services/data.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
 import { AuthFirebaseUser } from 'src/app/services/auth/firebase/auth.firebase.models';
+import { pages, Page } from './home.models';
 
 @Component({
   selector: 'app-home',
@@ -11,28 +12,18 @@ import { AuthFirebaseUser } from 'src/app/services/auth/firebase/auth.firebase.m
 })
 export class HomePage {
   currentUser:AuthFirebaseUser;
+  pageList: Array<Page> = pages.slice();
   constructor(
     private data: DataService,
     private authService: AuthService,
     private router: Router
   ) {
-    this.getUser()
+    this.setCurrentUser()
   }
-
-  refresh(ev) {
-    setTimeout(() => {
-      ev.detail.complete();
-    }, 3000);
-  }
-
-  getMessages(): Message[] {
-    return this.data.getMessages();
-  }
-  async getUser() {
-    (await this.authService.getCurrentUser()).subscribe((user) => {
-      this.currentUser = user
-      console.log(user)
-    })
+  
+  async setCurrentUser() {
+    this.currentUser = await this.authService.getCurrentUser()
+    console.log(this.currentUser)
   }
   async onLogout() {
     try {

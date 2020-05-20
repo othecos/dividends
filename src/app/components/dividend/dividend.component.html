@@ -1,0 +1,17 @@
+<ion-item *ngIf="dividend" class="ion-align-items-center" button detail>
+  <div slot="start" class="code">
+    <span class="code">{{ dividend.code }}</span>
+ 
+    
+  </div>
+  <ion-label class="ion-text-wrap ">
+    <p>
+      ON: <strong class="values" >{{dividend?.value?.ON ? (dividend?.value?.ON | currency:'BRL') : 'Sem preço'}}</strong>
+    </p>
+    <p>
+      PN: <strong class="values">{{dividend?.value?.PN ? (dividend?.value?.PN | currency:'BRL') : 'Sem preço'}}</strong>
+    </p>
+    <p>Data Ex.<ion-text [color]="dividend.exDate.getTime() > getCurrentDate() ? 'success' : 'danger'" >  {{ dividend.exDate | date:'dd/MM/yyyy' }}</ion-text></p>
+    <p>Data Compra<ion-text [color]="dividend.exDate.getTime() > getCurrentDate() ? 'success' : 'danger'" >  {{ dividend.comDate | date:'dd/MM/yyyy' }}</ion-text></p>
+  </ion-label>
+</ion-item>

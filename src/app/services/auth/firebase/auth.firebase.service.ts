@@ -107,6 +107,13 @@ export class AuthFirebaseService {
     console.log('Credentials', username, password)
     return await this.afAuth.createUserWithEmailAndPassword(username, password);
   }
+  async generateIdToken(){
+    return new Promise((resolve,reject)=>{
+     this.afAuth.idToken.subscribe((id)=>{
+        resolve(id)
+      },error=> reject(error))
+    })
+  }
   async deleteUserAuth(user: firebase.User) {
     return await user.delete();
   }

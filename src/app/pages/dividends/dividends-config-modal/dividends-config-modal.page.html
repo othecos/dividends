@@ -1,0 +1,46 @@
+<ion-header>
+
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="onDismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Filters</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [disabled]="filterForm.invalid" (click)="onDismiss(filterForm)">
+        <ion-icon name="checkmark"></ion-icon>
+      </ion-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <form #filterForm="ngForm" (ngSubmit)="onDismiss(filterForm)">
+      <ion-item-divider>
+        Date
+      </ion-item-divider>
+      <ion-item>
+        <ion-label>From</ion-label>
+        <ion-input name="from"   type="date" [(ngModel)]="from"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>To</ion-label>
+        <ion-input  name="to"  type="date" [(ngModel)]="to"></ion-input>
+      </ion-item>
+      <ion-item-divider>
+        Values
+      </ion-item-divider>
+      <ion-item>
+        <ion-label>Min</ion-label>
+        <ion-input   min="0" value="0" name="min" type="number" [(ngModel)]="min"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Max</ion-label>
+        <ion-input   min="0" value="0" name="max" type="number" [(ngModel)]="max"></ion-input>
+      </ion-item>
+    </form>
+  </ion-list>
+    
+</ion-content>

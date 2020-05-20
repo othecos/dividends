@@ -34,7 +34,7 @@ export class AuthService {
   async passwordRecovery() {
     return await this.firebase.passwordRecovery();
   }
-  async getCurrentUser(): Promise<Observable<AuthFirebaseUser>> {
+  async getCurrentUser(): Promise<AuthFirebaseUser> {
     return await this.firebaseUser.getCurrentUser();
   }
 }

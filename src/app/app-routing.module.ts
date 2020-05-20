@@ -13,10 +13,10 @@ const routes: Routes = [
     data: { authGuardPipe: redirectUnauthorizedToLogin} ,
     loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)},
   {
-    path: 'message/:id',
+    path: 'dividends',
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin},
-    loadChildren: () => import('./pages/view-message/view-message.module').then( m => m.ViewMessagePageModule)
+    loadChildren: () => import('./pages/dividends/dividends.module').then( m => m.DividendsPageModule)
   },
   {
     path: 'login',
@@ -31,6 +31,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/sign-up/sign-up.module').then( m => m.SignUpPageModule)
   },
   { path: '**', redirectTo: 'home' },
+ 
 
 ];
 

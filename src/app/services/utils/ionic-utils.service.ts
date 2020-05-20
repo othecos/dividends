@@ -24,9 +24,9 @@ export class IonicUtilsService {
     });
     await alert.present();
   }
-  async presentLoading() {
+  async presentLoading(message= 'Please wait...') {
     const loading = await this.loadingController.create({
-      message: 'Please wait...',
+      message,
     });
     await loading.present();
 

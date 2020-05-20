@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Dividends</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="onRefresh()">
+        <ion-icon name="refresh"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar [disabled]="dividends?.length == 0" (ionChange)="onSearch($event.detail.value)" placeholder="Search dividend code" showCancelButton="focus"
+  inputmode="text" animated>
+</ion-searchbar>
+<ion-item *ngIf="filters?.length > 0" >
+  <ion-label>Filters: </ion-label>
+  <ion-chip *ngFor="let filter of filters" (click)="onRemoveFilter(filter)">
+    <ion-label *ngIf="filter.type == 'value'">{{filter.key | titlecase }} : {{filter.value | currency: 'BRL'}}</ion-label>
+    <ion-label *ngIf="filter.type == 'date'">{{filter.key | titlecase }} : {{filter.value | date:'dd/MM/yyyy'}}</ion-label>
+    <ion-label *ngIf="filter.type == 'code'">{{filter.key | titlecase }} : {{filter.value }}</ion-label>
+    <ion-icon  name="close" color="danger"></ion-icon>
+  </ion-chip>
+  <ion-chip color="danger" (click)="onResetFilters()">
+    <ion-label>Clear</ion-label>
+    <ion-icon  name="close" color="danger"></ion-icon>
+  </ion-chip>
+</ion-item>
+  <ion-list >
+    <app-dividend *ngFor="let dividend of filteredDividends" [dividend]="dividend" (click)="onSelectDividend(dividend)"></app-dividend>
+    <ion-item *ngIf="filteredDividends?.length == 0">
+      <ion-label> No dividend were found</ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button [disabled]="dividends?.length == 0" color="dark" (click)="onPresentConfigModal()">
+      <ion-icon name="settings"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

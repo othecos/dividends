@@ -1,0 +1,9 @@
+ion-content ion-toolbar {
+  --background: var(--ion-background-color);
+}
+ion-button{
+  ion-avatar,img{
+    height: 100%;
+    width: auto;
+  }
+}

@@ -1,0 +1,63 @@
+<!-- Back button with custom text and icon -->
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="Sign-In" defaultHref="login">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>Create account </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content">
+    <div class="container">
+      <div class="logo">
+        <ion-avatar>
+          <img src="assets/img/user.png" alt="User-icon">
+        </ion-avatar>
+      </div>
+      <form #signUp="ngForm" class="box" (ngSubmit)="onSubmit(signUp)" appMustMatch [mustMatch]="['password','confirmPassword']">
+        <ion-item mode="md" lines="none" color="dark">
+          <ion-label color="light" position="floating">Email</ion-label>
+          <ion-input name="email" inputmode="email" type="email" required ngModel></ion-input>
+        </ion-item>
+        <ion-item mode="md" lines="none" color="dark">
+          <ion-label color="light" position="floating">Username</ion-label>
+          <ion-input name="username" inputmode="text" type="text" required ngModel></ion-input>
+        </ion-item>
+        <ion-item mode="md" lines="none" color="dark">
+          <ion-label color="light" position="floating">Password</ion-label>
+          <ion-input name="password" inputmode="password" [type]="showPassword ? 'text' :'password'" required ngModel minlength="6"></ion-input>
+          <ion-icon slot="end" [name]="showPassword ? 'eye' : 'eye-off'" class="ion-align-self-center" (click)="showPassword = !showPassword"></ion-icon>
+        </ion-item>
+        <ion-item mode="md" lines="none" color="dark">
+          <ion-label color="light" position="floating"> Confirm Password</ion-label>
+          <ion-input name="confirmPassword" inputmode="password" [type]="showPassword ? 'text' :'password'" required ngModel ></ion-input>
+          <ion-icon slot="end" [name]="showPassword ? 'eye' : 'eye-off'" class="ion-align-self-center" (click)="showPassword = !showPassword"></ion-icon>
+        </ion-item>
+        <ion-item *ngIf="signUp?.form?.controls?.confirmPassword?.errors?.mustMatch" >
+          <ion-text color="danger" >Passwords must match</ion-text>
+        </ion-item>
+        <div class="ion-buttons">
+          <ion-button color="secondary" [disabled]="!signUp.form.valid"  type="submit" shape="round">Save</ion-button>
+        </div>
+      </form>
+    </div>
+    <div class="provider-buttons">
+      <ion-row>
+        <ion-col>
+          <ion-button color="primary" shape="round" disabled>
+            <ion-icon color="dark" slot="icon-only" name="logo-facebook"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button color="danger" shape="round" (click)="onSignUpWithProvider('google')">
+            <ion-icon color="dark" slot="icon-only" name="logo-google"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+</ion-content>
+ 

@@ -1,0 +1,46 @@
+.content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    .container{
+        width: 40%;
+        @media all and (max-width: 1200px){
+            width: 50%;
+        }
+        @media all and (max-width: 992px){
+            width: 60%;
+        }
+        @media all and (max-width: 768px){
+            width: 70%;
+        }
+        @media all and (max-width: 576px){
+            width: 80%;
+        }
+    }
+}
+h1{
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 4rem;
+}
+ion-item{
+    border-radius: 20px;
+    margin-bottom: 1rem;
+    --background: #1e1e1e;
+}
+.ion-buttons{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    ion-button{
+        width: 50%;
+    }
+}
+ion-button{
+    width: 100%;
+}
+.provider-login-buttons{
+    margin-top: 1rem;
+}

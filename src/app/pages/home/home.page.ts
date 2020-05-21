@@ -23,7 +23,6 @@ export class HomePage {
   
   async setCurrentUser() {
     this.currentUser = await this.authService.getCurrentUser()
-    console.log(this.currentUser)
   }
   async onLogout() {
     try {

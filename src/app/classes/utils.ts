@@ -8,9 +8,7 @@ export  class Utils {
     }
     static castDateToIonicDateTime(date: string) {
         if (date) {
-          console.log(date);
           const [, year, month, day] = date.match(/([0-9]{4})-([0-9]{2})-([0-9]{2})/);
-          console.log(year, month, day, new Date(parseInt(year), parseInt(month), parseInt(day)));
           return new Date(parseInt(year, 10), parseInt(month, 10) - 1, parseInt(day, 10));
         } else {
           return null;

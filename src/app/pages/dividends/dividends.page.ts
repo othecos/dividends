@@ -15,7 +15,7 @@ import { DividendsConfigModalPage } from './dividends-config-modal/dividends-con
 })
 export class DividendsPage implements OnInit {
   dividends: Array<Dividend> = [];
-  filteredDividends: Array<Dividend> = [];
+  filteredDividends: Array<Dividend>;
   filters: Array<Filter> = [];
   constructor(
     private dividendsService: DividendsService,
@@ -24,20 +24,16 @@ export class DividendsPage implements OnInit {
     private route: ActivatedRoute,
     private ionicUtilsSevice: IonicUtilsService
   ) {
-   this.setDividends();
+    this.setDividends();
   }
 
   ngOnInit() {
   }
   async setDividends() {
-    this.ionicUtilsSevice.presentLoading('Getting data...');
     try {
       this.dividends = await this.dividendsService.getDividends();
-      console.log(this.dividends);
       this.setFiltered(this.dividends);
-      this.ionicUtilsSevice.dismissLoading();
     } catch  {
-      this.ionicUtilsSevice.dismissLoading();
     }
   }
   setFiltered(dividends: Array<Dividend>) {
@@ -153,17 +149,17 @@ export class DividendsPage implements OnInit {
     }
   }
   async onRefresh() {
-    this.ionicUtilsSevice.presentLoading('Refreshing Data');
+    this.filteredDividends = undefined
     try {
-      this.dividends = await this.dividendsService.refreshDividends();
+      await this.dividendsService.refreshDividends();
+      await this.setDividends()
     } catch (err) {
       console.error(err);
     }
-    this.ionicUtilsSevice.dismissLoading();
   }
   onSelectDividend(dividend: Dividend) {
     if (dividend) {
-      this.router.navigate(['dividend-view', dividend.id], {relativeTo: this.route});
+      this.router.navigate(['dividend-view', dividend.id], { relativeTo: this.route });
     }
   }
 }

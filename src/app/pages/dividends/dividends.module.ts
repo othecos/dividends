@@ -9,6 +9,7 @@ import { DividendsPageRoutingModule } from './dividends-routing.module';
 import { DividendsPage } from './dividends.page';
 import { DividendsConfigModalPage } from './dividends-config-modal/dividends-config-modal.page';
 import { DividendComponentModule } from 'src/app/components/dividend/dividend.module';
+import { DividendSkeletonComponentModule } from 'src/app/components/dividend-skeleton/dividend-skeleton.module';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { DividendComponentModule } from 'src/app/components/dividend/dividend.mo
     FormsModule,
     IonicModule,
     DividendComponentModule,
+    DividendSkeletonComponentModule,
     DividendsPageRoutingModule
   ],
   declarations: [DividendsPage, DividendsConfigModalPage],

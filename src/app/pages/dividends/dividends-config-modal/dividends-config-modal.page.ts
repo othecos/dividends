@@ -18,7 +18,6 @@ export class DividendsConfigModalPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.min,this.max,this.from,this.to)
   }
   onDismiss(ngForm?: NgForm) {
     if (ngForm) {

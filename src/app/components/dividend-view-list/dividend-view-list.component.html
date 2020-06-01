@@ -1,0 +1,82 @@
+<ion-list >
+  <ion-item>
+    <ion-label>
+     Código
+    </ion-label>
+    <ion-note slot="end">
+      {{dividend?.code}}
+    </ion-note>
+  </ion-item>
+  <ion-item button  (click)="onPresentInformationSelected('exDate','Ex. Data')">
+    <ion-label>
+      Ex. Data 
+    </ion-label>
+    <ion-note slot="end">
+      {{dividend?.exDate | date:'dd/MM/yyyy'}}
+    </ion-note>
+    <ion-icon slot="end" name="information-circle" ></ion-icon>
+  </ion-item>
+  <ion-item button (click)="onPresentInformationSelected('comDate','Com. Data')">
+    <ion-label>
+      Com. Data 
+    </ion-label>
+    <ion-note slot="end">
+      {{dividend?.comDate | date:'dd/MM/yyyy'}}
+    </ion-note>
+    <ion-icon slot="end" name="information-circle" ></ion-icon>
+  </ion-item>
+  <ion-item >
+    <ion-label>
+      Data Aprovação
+    </ion-label>
+    <ion-note slot="end">
+      {{dividend?.aprovalDate | date:'dd/MM/yyyy'}}
+    </ion-note>
+  </ion-item>
+  <ion-item button (click)="onPresentInformationSelected('paymentDate','Data do pagamento')">
+    <ion-label>
+      Data do pagamento 
+    </ion-label>
+    <ion-note slot="end">
+      {{dividend?.paymentDate | date:'dd/MM/yyyy'}}
+    </ion-note>
+    <ion-icon slot="end" name="information-circle" ></ion-icon>
+  </ion-item>
+  <ion-item>
+    <ion-label>
+      Tipo do pagamento 
+    </ion-label>
+    <ion-note slot="end">
+      {{dividend?.paymentType}}
+    </ion-note>
+  </ion-item>
+
+  <ion-item *ngIf="dividend">
+    <ion-label>
+      Pagamento por tipo de cota:
+    </ion-label>
+    <ion-note slot="end">
+      <p>ON: {{dividend?.value?.ON| currency: 'BRL'}}</p>
+      <p>PN: {{dividend?.value?.PN | currency: 'BRL'}}</p>
+    </ion-note>
+   
+  </ion-item>
+  <ion-item>
+    <ion-label>
+      Preço do ativo
+    </ion-label>
+    <ion-note slot="end">
+      <p *ngFor="let quote of quotes">Preço {{quote.type}}: {{quote?.price | currency: 'BRL'}}</p>
+    </ion-note>
+  </ion-item>
+  <ion-item>
+    <ion-label>
+      <ion-text >Dividend Yield pagamento</ion-text>
+    </ion-label>
+    <ion-note slot="end">
+      <p *ngFor="let quote of quotes;index as i">
+      {{quote.type.toUpperCase()}}:  <ion-text  [color]="getYield(dividend,quote) > 0.05 / 12 ? 'success' : 'primary' ">{{getYield(dividend,quote) | percent:'1.3-5'}}</ion-text>
+      </p>
+    </ion-note>
+  </ion-item>
+</ion-list>

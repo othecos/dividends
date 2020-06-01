@@ -5,6 +5,7 @@ import { DividendsService } from 'src/app/services/dividends/dividends.service';
 import { IonicUtilsService } from 'src/app/services/utils/ionic-utils.service';
 import { QuotesService } from 'src/app/services/quotes/quotes.service';
 import { Quote } from 'src/app/services/quotes/quotes.models';
+import { QuoteFactory } from 'src/app/services/quotes/quotes.factory';
 
 @Component({
   selector: 'app-dividend-view',
@@ -15,8 +16,10 @@ export class DividendViewPage implements OnInit {
 
   id: string;
   dividend: Dividend;
-  quote: Quote;
-  isLoading = false;
+  on_quote: Quote;
+  pn_quote: Quote;
+  unit_quote: Quote;
+  quotes: Array<Quote>
   constructor(
     private route: ActivatedRoute,
     private dividendsService: DividendsService,
@@ -30,8 +33,6 @@ export class DividendViewPage implements OnInit {
   }
   async loadDividendById() {
     try {
-      this.isLoading = true
-      await this.ionicUtilsService.presentLoading()
       const dividends = await this.dividendsService.getDividends();
       this.dividend = dividends.find((dividend) => dividend.id === this.id);
       if (this.dividend) {
@@ -39,31 +40,18 @@ export class DividendViewPage implements OnInit {
       }
     } catch {}
     await this.ionicUtilsService.dismissLoading();
-    this.isLoading = false;
   }
   ngOnInit() {
   }
   async setQuote(code) {
     try {
-      const result = await this.quoteService.searchForQuotePrices([code + '3']);
-      this.quote = result[0];
-      console.log(result, this.quote);
+      const result = await this.quoteService.searchForQuotePrices([code + '3',code + '4',code + '11']);
+      this.quotes = result
     } catch {
     }
   }
   castToNumber(value) {
     return Number(value);
-  }
-  getYield() {
-    if (this.dividend && this.quote) {
-      return this.dividend.value.ON / this.quote.price
-    } else {
-      return 0;
-    }
-  }
-  onPresentInformationSelected(key, label) {
-    const message = Dividend.getInformation(key);
-    this.ionicUtilsService.presentAlert(label, null, message, 'Ok');
   }
 
 }

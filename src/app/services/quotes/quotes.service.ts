@@ -6,6 +6,7 @@ import { Quote } from './quotes.models';
 import { URL } from 'src/app/configs/credentials/crendentials';
 import { AuthFirebaseService } from '../auth/firebase/auth.firebase.service';
 import { getHeaders } from '../dividends/dividends.models';
+import { QuoteFactory } from './quotes.factory';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +35,8 @@ export class QuotesService {
     headers['params'] = params
     return this.http.get(`${URL}/stocks/quotes/`, headers).pipe(map((prices: Array<any>) => {
       return prices.map((price) => {
-        return new Quote(
+        return QuoteFactory.create(
+          price.type,
           price.code,
           price.price,
           price.timestamp,

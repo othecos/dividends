@@ -30,6 +30,9 @@
   </ion-chip>
 </ion-item>
   <ion-list >
+    <ng-container *ngIf="!filteredDividends">
+      <app-dividend-skeleton *ngFor="let item of [0,1,2,3,4,5,6,7,8,9]"></app-dividend-skeleton>
+    </ng-container>
     <app-dividend *ngFor="let dividend of filteredDividends" [dividend]="dividend" (click)="onSelectDividend(dividend)"></app-dividend>
     <ion-item *ngIf="filteredDividends?.length == 0">
       <ion-label> No dividend were found</ion-label>
